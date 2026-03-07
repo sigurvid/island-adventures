@@ -1,0 +1,12 @@
+# Serve index.html when a directory is requested (fixes 404 on /faq, /contact, /tours/private, etc.)
+DirectoryIndex index.html
+
+# If the request is for a path without trailing slash and that path is a directory, redirect to add slash
+# (Next.js static export uses trailing slashes; this helps old links and direct URLs work.)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteRule ^(.*)$ $1/ [L,R=301]
+</IfModule>

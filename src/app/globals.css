@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-alpine: #1e3a5f;
+  --color-alpine-light: #2d5a8a;
+  --color-alpine-dark: #152a45;
+  --color-accent-black: #0f172a;
+  --color-white: #ffffff;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply text-accent-black antialiased;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-alpine;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-alpine px-6 py-3 font-semibold text-white transition hover:bg-alpine-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-lg border-2 border-alpine bg-transparent px-6 py-3 font-semibold text-alpine transition hover:bg-alpine hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine;
+  }
+  .section-heading {
+    @apply text-2xl font-bold tracking-tight text-alpine-dark sm:text-3xl;
+  }
+  .prose-inline {
+    @apply text-gray-700 leading-relaxed;
+  }
+}
+
+/* Placeholder for hero/background images - swap via Tailwind or inline style */
+.hero-bg {
+  background-size: cover;
+  background-position: center;
+}
