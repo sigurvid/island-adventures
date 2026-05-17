@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 /**
- * Custom trip inquiry — email via Resend or SendGrid.
+ * Luxury trip inquiry — email via Resend or SendGrid.
  *
  * Env vars (choose one):
  * - RESEND_API_KEY + NEXT_PUBLIC_FROM_EMAIL + NEXT_PUBLIC_TO_EMAIL (Resend)
@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
         body: JSON.stringify({
           from: fromEmail,
           to: [toEmail],
-          subject: `Custom trip inquiry — ${name}`,
+          subject: `Luxury trip inquiry — ${name}`,
           text,
         }),
       });
@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
         body: JSON.stringify({
           personalizations: [{ to: [{ email: toEmail }] }],
           from: { email: fromEmail, name: 'Island Adventures' },
-          subject: `Custom trip inquiry — ${name}`,
+          subject: `Luxury trip inquiry — ${name}`,
           content: [{ type: 'text/plain', value: text }],
         }),
       });

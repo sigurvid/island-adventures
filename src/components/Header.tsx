@@ -1,8 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+
+/** Icelandic locale is on hold: routes stay live; toggle hidden until copy is final. */
+const SHOW_ICELANDIC_LOCALE_TOGGLE = false;
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -18,6 +21,28 @@ const SCROLL_THRESHOLD = 24;
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isIS = pathname?.startsWith('/is');
+
+  const withLocale = (href: string) => {
+    if (!isIS) return href;
+    if (href === '/') return '/is';
+    if (href.startsWith('/#')) return `/is${href}`;
+    return `/is${href}`;
+  };
+
+  const label = (en: string) => {
+    if (!isIS) return en;
+    const map: Record<string, string> = {
+      Home: 'Heim',
+      Tours: 'Ferðir',
+      Book: 'Bóka',
+      Highlights: 'Hápunktar',
+      FAQ: 'Algengar spurningar',
+      Contact: 'Hafa samband',
+    };
+    return map[en] ?? en;
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > SCROLL_THRESHOLD);
@@ -34,21 +59,20 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 md:py-0">
         <Link
-          href="/"
+          href={isIS ? '/is' : '/'}
           className="flex shrink-0 items-center gap-2 bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine rounded"
           aria-label="Island Adventures home"
         >
-          <Image
+          {/* Native img avoids any Next/Image wrapper quirks; PNG alpha is preserved if the file exports it. */}
+          <img
             src="/logo.png"
             alt="Island Adventures — RIB boat tours Vestmannaeyjar"
             width={160}
             height={64}
-            className={`w-auto object-contain transition-all duration-300 h-10 sm:h-12 md:h-14 ${
+            decoding="async"
+            className={`h-10 w-auto object-contain transition-all duration-300 sm:h-12 ${
               scrolled ? 'md:h-10' : 'md:h-14'
             }`}
-            style={{ background: 'transparent' }}
-            priority
-            unoptimized
           />
         </Link>
 
@@ -56,33 +80,42 @@ export function Header() {
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              href={withLocale(link.href)}
               className={`font-medium text-alpine-dark hover:text-alpine focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine rounded transition-all duration-300 ${
                 scrolled ? 'text-sm' : 'text-base'
               }`}
             >
-              {link.label}
+              {label(link.label)}
             </Link>
           ))}
           <Link
-            href="/#book"
+            href={withLocale('/#book')}
             className={`btn-primary transition-all duration-300 ${scrolled ? 'text-sm py-2 px-4' : 'text-base py-2.5 px-5'}`}
           >
-            Book Now
+            {isIS ? 'Bóka núna' : 'Book Now'}
           </Link>
           <Link
-            href="/tours/custom"
+            href={withLocale('/tours/custom')}
             className={`font-medium text-alpine-dark hover:text-alpine focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine rounded transition-all duration-300 ${
               scrolled ? 'text-sm' : 'text-base'
             }`}
           >
-            Custom Tours
+            {isIS ? 'Sérferðir' : 'Luxury trips'}
           </Link>
+          {SHOW_ICELANDIC_LOCALE_TOGGLE && (
+            <Link
+              href={isIS ? '/' : '/is'}
+              className="rounded border border-alpine/20 px-2 py-1 text-xs font-semibold text-alpine-dark hover:bg-alpine/5 transition-colors"
+              aria-label={isIS ? 'Switch to English' : 'Skipta yfir á íslensku'}
+            >
+              {isIS ? 'EN' : 'ÍS'}
+            </Link>
+          )}
         </nav>
 
         <div className="flex items-center gap-2 md:hidden">
-          <Link href="/#book" className="btn-primary text-sm py-2 px-4">
-            Book Now
+          <Link href={withLocale('/#book')} className="btn-primary text-sm py-2 px-4">
+            {isIS ? 'Bóka núna' : 'Book Now'}
           </Link>
           <button
             type="button"
@@ -114,20 +147,29 @@ export function Header() {
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              href={withLocale(link.href)}
               onClick={() => setMenuOpen(false)}
               className="rounded-lg px-3 py-2 text-sm font-medium text-alpine-dark hover:bg-alpine/5 hover:text-alpine focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine"
             >
-              {link.label}
+              {label(link.label)}
             </Link>
           ))}
           <Link
-            href="/tours/custom"
+            href={withLocale('/tours/custom')}
             onClick={() => setMenuOpen(false)}
             className="rounded-lg px-3 py-2 text-sm font-medium text-alpine-dark hover:bg-alpine/5 hover:text-alpine"
           >
-            Custom Tours
+            {isIS ? 'Sérferðir' : 'Luxury trips'}
           </Link>
+          {SHOW_ICELANDIC_LOCALE_TOGGLE && (
+            <Link
+              href={isIS ? '/' : '/is'}
+              onClick={() => setMenuOpen(false)}
+              className="rounded-lg px-3 py-2 text-sm font-semibold text-alpine-dark hover:bg-alpine/5 hover:text-alpine"
+            >
+              {isIS ? 'English (EN)' : 'Íslenska (ÍS)'}
+            </Link>
+          )}
         </nav>
       </div>
     </header>

@@ -23,7 +23,7 @@ export default function TermsPage() {
         </p>
         <p>
           <strong>2a. Minimum group size (scheduled tours)</strong><br />
-          Our scheduled 1-hour and 2-hour tours have a <strong>minimum of 4 persons</strong>. If the minimum is not met, we will cancel the tour and offer you a full refund or an alternative date (subject to availability), in line with our cancellation policy. Private charters and custom trips are not subject to this minimum.
+          Our scheduled 1-hour and 2-hour tours have a <strong>minimum of 4 persons</strong>. If the minimum is not met, we will cancel the tour and offer you a full refund or an alternative date (subject to availability), in line with our cancellation policy. Private charters and luxury trips are not subject to this minimum.
         </p>
         <p>
           <strong>3. Cancellation by you</strong><br />

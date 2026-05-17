@@ -53,7 +53,7 @@ export default function OneHourTourPage() {
           See 2-hour tour
         </Link>
       </div>
-      <p className="mt-4 text-gray-600">For a private 1- or 2-hour charter (same tour, your group only) or custom trips (tailored itineraries, catering, hen/stag parties, etc.) — <Link href="/tours/custom" className="text-alpine font-medium underline hover:text-alpine-light">see custom trips</Link>.</p>
+      <p className="mt-4 text-gray-600">For a private 1- or 2-hour charter (same tour, your group only) or luxury trips (tailored itineraries, catering, celebrations, etc.) — <Link href="/tours/custom" className="text-alpine font-medium underline hover:text-alpine-light">see luxury trips</Link>.</p>
       <div className="prose-inline mt-10 space-y-4 text-gray-700">
         <p>Sightings of specific wildlife (e.g. puffins) are not guaranteed and depend on season and conditions. Tours are weather-dependent; see our FAQ and Terms for cancellation and meeting point details.</p>
       </div>

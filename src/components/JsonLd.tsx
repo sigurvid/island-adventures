@@ -5,7 +5,7 @@ export function LocalBusinessJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'Island Adventures',
-    description: 'RIB boat tours from Vestmannaeyjar (Westman Islands), Iceland. 1-hour and 2-hour tours, private charters and custom trips. May–October.',
+    description: 'RIB boat tours from Vestmannaeyjar (Westman Islands), Iceland. 1-hour and 2-hour tours, private charters and luxury trips. May–October.',
     url: SITE_URL,
     image: `${SITE_URL}/logo.png`,
     address: {
@@ -51,7 +51,7 @@ const TOURS: TourJsonLdItem[] = [
   { name: '1-hour RIB tour', description: 'Coastal RIB tour: cliffs, caves and birdlife.', url: `${SITE_URL}/tours/one-hour`, duration: 'PT1H' },
   { name: '2-hour RIB tour', description: 'Extended RIB tour with more sea caves and coastline.', url: `${SITE_URL}/tours/two-hour`, duration: 'PT2H' },
   { name: 'Private RIB charter', description: 'Same 1-hour or 2-hour RIB tour as scheduled trips — just for your group.', url: `${SITE_URL}/tours/private`, duration: 'PT1H' },
-  { name: 'Custom trips', description: 'Tailored RIB experiences: luxury with catering, hen/stag parties, longer or custom itineraries.', url: `${SITE_URL}/tours/custom` },
+  { name: 'Luxury trips', description: 'Tailored luxury RIB experiences: catering, celebrations, longer or bespoke itineraries.', url: `${SITE_URL}/tours/custom` },
 ];
 
 export function TourJsonLd() {

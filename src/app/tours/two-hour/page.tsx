@@ -45,14 +45,21 @@ export default function TwoHourTourPage() {
         </p>
       </div>
       <div className="mt-8 flex flex-wrap gap-4">
-        <Link href="/#book" className="btn-primary">
-          Check availability & book
+        <Link href="/#custom" className="btn-primary">
+          Request a 2-hour tour
         </Link>
         <Link href="/tours/one-hour" className="btn-secondary">
           See 1-hour tour
         </Link>
       </div>
-      <p className="mt-4 text-gray-600">For a private 1- or 2-hour charter (same tour, your group only) or custom trips (tailored itineraries, catering, hen/stag parties, etc.) — <Link href="/tours/custom" className="text-alpine font-medium underline hover:text-alpine-light">see custom trips</Link>.</p>
+      <p className="mt-4 text-gray-600">
+        To book a 2-hour tour right now, please use the request form at the bottom of the homepage. You can also use it for private charters and luxury trips (tailored itineraries, catering, celebrations, etc.).
+        {' '}
+        <Link href="/#custom" className="text-alpine font-medium underline hover:text-alpine-light">
+          Go to request form
+        </Link>
+        .
+      </p>
       <div className="prose-inline mt-10 space-y-4 text-gray-700">
         <p>Sightings of specific wildlife are not guaranteed and depend on season and conditions. Tours are weather-dependent; see our FAQ and Terms for cancellation and meeting point details.</p>
       </div>

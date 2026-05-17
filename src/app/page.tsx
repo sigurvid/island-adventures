@@ -4,9 +4,14 @@ import { ImageCarousel } from '@/components/ImageCarousel';
 import { CustomTripForm } from '@/components/CustomTripForm';
 import { LocalBusinessJsonLd, TourJsonLd } from '@/components/JsonLd';
 
-/** Hero images: add or remove paths to change the hero carousel. */
-const HERO_IMAGES: { src: string; alt: string }[] = [
-  { src: '/images/hero.jpg', alt: 'RIB boat tours Vestmannaeyjar' },
+/** Hero images: add or remove paths to change the hero carousel. Optional `backgroundPosition` per slide (hero only). */
+const HERO_IMAGES = [
+  {
+    src: '/images/hero.jpg',
+    alt: 'RIB boat tours Vestmannaeyjar',
+    /** Less sky — anchor crop toward the lower / sea portion of the frame */
+    backgroundPosition: 'center 65%',
+  },
   { src: '/images/hero2.jpg', alt: 'RIB boat tours Vestmannaeyjar' },
   { src: '/images/hero3.jpg', alt: 'RIB boat tours Vestmannaeyjar' },
 ];
@@ -32,13 +37,14 @@ const TOUR_CARDS = [
     imageSrcs: ['/images/tour-2h.jpg'],
     imageAlt: '2-hour RIB tour along Westman Islands cliffs',
     fromPrice: '22,000 ISK adult, 12,000 ISK child',
-    ctaLabel: 'Book',
+    ctaLabel: 'Request 2-hour tour',
+    ctaHref: '/#custom',
   },
   {
     slug: '/tours/private',
     title: 'Private charters',
     description:
-      'The same 1-hour or 2-hour RIB tours as our scheduled trips — just for your group only. Same sea caves, cliffs and wildlife; you choose the time. Available by direct inquiry only.',
+      'Reward your team with a high-impact day on the water, or turn a stag or hen weekend into something nobody stops talking about. Same epic 1-hour or 2-hour RIB route as our scheduled tours — your group, your pace, your soundtrack. By inquiry only.',
     duration: '1h or 2h',
     imageSrcs: ['/images/tour-private.jpg'],
     imageAlt: 'Private RIB charter Vestmannaeyjar',
@@ -48,13 +54,13 @@ const TOUR_CARDS = [
   },
   {
     slug: '/tours/custom',
-    title: 'Custom trips',
+    title: 'Luxury trips',
     description:
-      'Whatever you have in mind: luxury trips with catering, hen and stag parties, longer or tailored itineraries — we can cater to it all. Unlike private charters (same 1h/2h tour, your group only), custom trips are built around you. Contact us to plan something unique.',
+      'Bespoke RIB experiences: champagne and catering on the water, longer routes, celebrations and brand moments — built entirely around you. Unlike private charters (the classic 1h/2h tour, your boat only), luxury trips are tailored itineraries. Tell us what you’re planning.',
     duration: 'On request',
     imageSrcs: ['/images/tour-custom.jpg'],
-    imageAlt: 'Custom RIB trip Westman Islands',
-    ctaLabel: 'Request a custom trip',
+    imageAlt: 'Luxury RIB experience Westman Islands',
+    ctaLabel: 'Request a luxury trip',
     ctaHref: '/tours/custom#request',
   },
 ];
@@ -70,20 +76,20 @@ export default function HomePage() {
         className="relative min-h-[70vh] flex flex-col justify-end bg-alpine-dark text-white"
         aria-label="Welcome"
       >
-        <ImageCarousel images={HERO_IMAGES} variant="hero" intervalMs={10000} />
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-16 pt-24 sm:px-6 sm:pb-20">
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+        <ImageCarousel images={HERO_IMAGES} variant="hero" intervalMs={10000} heroBackgroundPosition="center 40%" />
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-14 pt-20 sm:px-6 sm:pb-16">
+          <h1 className="text-3xl font-bold tracking-tight text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.65)] [text-shadow:0_1px_2px_rgba(0,0,0,0.55),0_3px_14px_rgba(0,0,0,0.35)] sm:text-4xl md:text-5xl">
             RIB boat tours from the Westman Islands
           </h1>
-          <p className="mt-4 max-w-xl text-lg text-white/90">
-            Sea caves, cliffs and wildlife. 1-hour and 2-hour tours, private charters and custom trips. May–October.
+          <p className="mt-4 max-w-xl text-lg text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]">
+            Sea caves, cliffs and wildlife. 1-hour and 2-hour tours, private charters and luxury trips. May–October.
           </p>
           <div className="mt-6 flex flex-wrap gap-4">
             <Link href="/#book" className="btn-primary bg-white text-alpine hover:bg-white/90">
               Check availability
             </Link>
             <Link href="/tours/custom" className="btn-secondary border-white text-white hover:bg-white hover:text-alpine">
-              Custom trips
+              Luxury trips
             </Link>
           </div>
         </div>
@@ -93,7 +99,13 @@ export default function HomePage() {
       <section id="tours" className="border-t border-alpine/10 bg-gray-50 py-14 sm:py-18">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <h2 className="section-heading mb-2">Choose your tour</h2>
-          <p className="mb-8 text-gray-600">Book our 1-hour or 2-hour tours online below. Private charters and custom trips are available by contacting us directly — not sold on this site or elsewhere online.</p>
+          <p className="mb-8 text-gray-600">
+            Book our 1-hour tour online below. For 2-hour tours (and July–September dates), we currently take bookings by inquiry — please{' '}
+            <Link href="/#custom" className="font-medium text-alpine underline hover:text-alpine-light">
+              request via the form
+            </Link>
+            .
+          </p>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {TOUR_CARDS.map((tour) => (
               <TourCard key={tour.slug} {...tour} />
@@ -107,11 +119,37 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <h2 className="section-heading mb-2">Book now</h2>
           <p className="mb-4 text-gray-600">
-            Online booking is open for May and June 1-hour tours only at this time. Choose a date below to see live availability and book securely through Bókun.
+            We’ve started booking for <strong>May and June</strong> only at this time. Choose a date below to see live availability for eligible 1-hour tours and book securely through Bókun.
           </p>
           <p className="mb-4 text-gray-600">
-            We’ll add July, August, and September dates shortly. For 2h trips, private charters or custom trips, please <a href="mailto:Booking@islandadventures.is" className="text-alpine font-medium underline hover:text-alpine-light">contact us</a>.
+            For <strong>everything else</strong> — other months, 2-hour tours, private charters or luxury trips — please{' '}
+            <a href="mailto:booking@islandadventures.is" className="font-medium text-alpine underline hover:text-alpine-light">
+              contact us
+            </a>
+            .
           </p>
+          <div className="mb-8 rounded-lg border border-alpine/15 bg-gray-50 px-4 py-4 text-sm text-gray-800">
+            <h3 className="font-semibold text-alpine-dark">Good to know before you book</h3>
+            <ul className="mt-2 list-inside list-disc space-y-1.5 text-gray-700">
+              <li>
+                <strong>Minimum group size:</strong> scheduled 1-hour and 2-hour tours need <strong>4 guests</strong>. If we don’t reach that minimum, we may cancel the departure and offer a <strong>full refund</strong> or an alternative date (subject to availability).
+              </li>
+              <li>
+                <strong>Weather &amp; safety:</strong> tours depend on conditions. If we cancel for weather or safety, we’ll offer a <strong>new date</strong> or a <strong>full refund</strong>. The captain’s decision is final.
+              </li>
+            </ul>
+            <p className="mt-3 text-gray-600">
+              Full wording is in our{' '}
+              <Link href="/terms" className="font-medium text-alpine underline hover:text-alpine-light">
+                Terms &amp; Cancellation
+              </Link>{' '}
+              and{' '}
+              <Link href="/faq" className="font-medium text-alpine underline hover:text-alpine-light">
+                FAQ
+              </Link>
+              .
+            </p>
+          </div>
           <p className="mb-8 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
             Want a <strong>2-hour tour</strong> or a date in <strong>July–September</strong>? <Link href="/contact#custom" className="font-medium underline hover:text-alpine">Contact us</Link> — we’ll get you sorted.
           </p>
@@ -123,7 +161,15 @@ export default function HomePage() {
             <noscript>Please enable JavaScript in your browser to book.</noscript>
           </div>
           <p className="mt-6 text-sm text-gray-500">
-            Interested in a private charter or custom trip? <Link href="/tours/custom" className="text-alpine font-medium underline hover:text-alpine-light">Request a custom trip</Link> or <Link href="/contact" className="text-alpine font-medium underline hover:text-alpine-light">contact us</Link> — we don’t sell those online, only by direct contact.
+            Interested in a private charter or luxury trip?{' '}
+            <Link href="/tours/custom" className="font-medium text-alpine underline hover:text-alpine-light">
+              Request a luxury trip
+            </Link>{' '}
+            or{' '}
+            <Link href="/contact" className="font-medium text-alpine underline hover:text-alpine-light">
+              contact us
+            </Link>{' '}
+            — we don’t sell those online, only by direct contact.
           </p>
         </div>
       </section>
@@ -194,7 +240,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <h2 className="section-heading mb-2">Contact</h2>
           <p className="mb-8 text-gray-600">
-            Email us anytime: <a href="mailto:booking@islandadventures.is" className="text-alpine font-medium underline hover:text-alpine-light">booking@islandadventures.is</a>. For custom trips — luxury trips with catering, hen and stag parties, or anything in between — use the form below.
+            Email us anytime: <a href="mailto:booking@islandadventures.is" className="text-alpine font-medium underline hover:text-alpine-light">booking@islandadventures.is</a>. For luxury trips — catering, celebrations, longer routes, or anything in between — use the form below.
           </p>
           <div className="grid gap-10 lg:grid-cols-2">
             <div>

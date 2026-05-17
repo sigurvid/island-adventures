@@ -13,9 +13,13 @@ export type TourCardProps = {
   imageSrcs?: string[];
   imageAlt: string;
   fromPrice?: string;
+  /** Default "From ". Use e.g. "Frá " for Icelandic. Ignored for inquiry-style prices ("By …", "Samkvæmt …"). */
+  pricePrefix?: string;
   ctaLabel?: string;
   /** If set, primary CTA goes here (e.g. /contact#custom for inquiry-only tours). Otherwise goes to /#book */
   ctaHref?: string;
+  /** Secondary link label (default "Details"). */
+  detailsLabel?: string;
 };
 
 export function TourCard({
@@ -27,8 +31,10 @@ export function TourCard({
   imageSrcs,
   imageAlt,
   fromPrice,
+  pricePrefix,
   ctaLabel = 'Book',
   ctaHref = '/#book',
+  detailsLabel = 'Details',
 }: TourCardProps) {
   const images = imageSrcs?.length
     ? imageSrcs.map((src) => ({ src, alt: imageAlt }))
@@ -70,7 +76,9 @@ export function TourCard({
         <p className="mt-2 text-sm text-gray-600 line-clamp-3">{description}</p>
         {fromPrice && (
           <p className="mt-2 text-sm font-semibold text-alpine">
-            {fromPrice.startsWith('By ') ? fromPrice : `From ${fromPrice}`}
+            {fromPrice.startsWith('By ') || fromPrice.startsWith('Samkvæmt ')
+              ? fromPrice
+              : `${pricePrefix ?? 'From '}${fromPrice}`}
           </p>
         )}
         <div className="mt-4 flex flex-wrap gap-2">
@@ -78,7 +86,7 @@ export function TourCard({
             {ctaLabel}
           </Link>
           <Link href={slug} className="btn-secondary text-sm py-2 px-4">
-            Details
+            {detailsLabel}
           </Link>
         </div>
       </div>

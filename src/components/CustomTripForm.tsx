@@ -2,45 +2,144 @@
 
 import { useState, FormEvent } from 'react';
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_REGEX = /^\+?[0-9]+$/;
+
+export type CustomTripFormCopy = {
+  heading: string;
+  intro: string;
+  labels: {
+    name: string;
+    email: string;
+    phone: string;
+    preferredDate: string;
+    groupSize: string;
+    interests: string;
+    notes: string;
+  };
+  placeholders: { phone: string; groupSize: string };
+  validation: {
+    nameRequired: string;
+    emailRequired: string;
+    emailInvalid: string;
+    phoneRequired: string;
+    phoneInvalid: string;
+    preferredDateRequired: string;
+    preferredDateUnavailable: string;
+    groupSizeRequired: string;
+  };
+  mailto: {
+    subject: string;
+    bodyLines: {
+      name: string;
+      email: string;
+      phone: string;
+      preferredDate: string;
+      groupSize: string;
+      interests: string;
+      notes: string;
+    };
+  };
+  success: string;
+  /** Shown when no server message (network/API error). */
+  errorGeneric: string;
+  errorEmailPrompt: string;
+  errorOr: string;
+  submitSending: string;
+  submitMailto: string;
+  submitSend: string;
+};
+
+export const DEFAULT_CUSTOM_TRIP_FORM_COPY: CustomTripFormCopy = {
+  heading: 'Request a luxury trip',
+  intro:
+    'Tell us your dates, group size and what you’d like to see. You can also use this form to inquire about our 2-hour tours. We’ll get back to you shortly.',
+  labels: {
+    name: 'Name',
+    email: 'Email',
+    phone: 'Phone',
+    preferredDate: 'Preferred date',
+    groupSize: 'Group size',
+    interests: 'Interests (e.g. caves, puffins, photography)',
+    notes: 'Notes',
+  },
+  placeholders: {
+    phone: 'e.g. 3541234567 or +3541234567',
+    groupSize: 'e.g. 6 adults, 2 children',
+  },
+  validation: {
+    nameRequired: 'Name is required',
+    emailRequired: 'Email is required',
+    emailInvalid: 'Please enter a valid email address',
+    phoneRequired: 'Phone number is required',
+    phoneInvalid: 'Phone number may only contain numbers and an optional + at the start',
+    preferredDateRequired: 'Preferred date is required',
+    preferredDateUnavailable: 'This date is not available for luxury trips. Please choose another.',
+    groupSizeRequired: 'Group size is required',
+  },
+  mailto: {
+    subject: 'Luxury trip inquiry — Island Adventures',
+    bodyLines: {
+      name: 'Name',
+      email: 'Email',
+      phone: 'Phone',
+      preferredDate: 'Preferred date',
+      groupSize: 'Group size',
+      interests: 'Interests',
+      notes: 'Notes',
+    },
+  },
+  success: 'Thanks! We’ll be in touch soon.',
+  errorGeneric: 'Something went wrong. ',
+  errorEmailPrompt: 'Please email us at',
+  errorOr: 'or',
+  submitSending: 'Sending…',
+  submitMailto: 'Open email to send',
+  submitSend: 'Send request',
+};
+
 type CustomTripFormProps = {
-  /** Use API route (e.g. /api/custom-trip). If not set, form uses mailto fallback. */
   apiEndpoint?: string;
-  /** Email for mailto fallback (e.g. custom@example.com) */
   fallbackEmail?: string;
+  copy?: CustomTripFormCopy;
 };
 
 const defaultEmail = 'booking@islandadventures.is';
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_REGEX = /^\+?[0-9]+$/;
-
-function validateForm(formData: { name: string; email: string; phone: string; preferredDate: string; groupSize: string }) {
+function validateForm(
+  formData: { name: string; email: string; phone: string; preferredDate: string; groupSize: string },
+  v: CustomTripFormCopy['validation']
+) {
   const errors: Record<string, string> = {};
-  if (!formData.name.trim()) errors.name = 'Name is required';
+  if (!formData.name.trim()) errors.name = v.nameRequired;
   if (!formData.email.trim()) {
-    errors.email = 'Email is required';
+    errors.email = v.emailRequired;
   } else if (!EMAIL_REGEX.test(formData.email.trim())) {
-    errors.email = 'Please enter a valid email address';
+    errors.email = v.emailInvalid;
   }
   const phoneDigits = formData.phone.replace(/\s/g, '');
   if (!phoneDigits) {
-    errors.phone = 'Phone number is required';
+    errors.phone = v.phoneRequired;
   } else if (!PHONE_REGEX.test(phoneDigits) || /[a-zA-Z]/.test(formData.phone)) {
-    errors.phone = 'Phone number may only contain numbers and an optional + at the start';
+    errors.phone = v.phoneInvalid;
   }
   if (!formData.preferredDate) {
-    errors.preferredDate = 'Preferred date is required';
+    errors.preferredDate = v.preferredDateRequired;
   } else {
     const d = formData.preferredDate;
     if (d < '2026-05-01' || d > '2026-09-30') {
-      errors.preferredDate = 'This date is not available for custom trips. Please choose another.';
+      errors.preferredDate = v.preferredDateUnavailable;
     }
   }
-  if (!formData.groupSize.trim()) errors.groupSize = 'Group size is required';
+  if (!formData.groupSize.trim()) errors.groupSize = v.groupSizeRequired;
   return errors;
 }
 
-export function CustomTripForm({ apiEndpoint, fallbackEmail = defaultEmail }: CustomTripFormProps) {
+export function CustomTripForm({
+  apiEndpoint,
+  fallbackEmail = defaultEmail,
+  copy = DEFAULT_CUSTOM_TRIP_FORM_COPY,
+}: CustomTripFormProps) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
@@ -63,16 +162,17 @@ export function CustomTripForm({ apiEndpoint, fallbackEmail = defaultEmail }: Cu
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const errors = validateForm(formData);
+    const errors = validateForm(formData, copy.validation);
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
       return;
     }
     setFieldErrors({});
     if (useMailto) {
-      const subject = encodeURIComponent('Custom trip inquiry — Island Adventures');
+      const subject = encodeURIComponent(copy.mailto.subject);
+      const { bodyLines } = copy.mailto;
       const body = encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nPreferred date: ${formData.preferredDate}\nGroup size: ${formData.groupSize}\nInterests: ${formData.interests}\nNotes: ${formData.notes}`
+        `${bodyLines.name}: ${formData.name}\n${bodyLines.email}: ${formData.email}\n${bodyLines.phone}: ${formData.phone}\n${bodyLines.preferredDate}: ${formData.preferredDate}\n${bodyLines.groupSize}: ${formData.groupSize}\n${bodyLines.interests}: ${formData.interests}\n${bodyLines.notes}: ${formData.notes}`
       );
       window.location.href = `mailto:${fallbackEmail}?subject=${subject}&body=${body}`;
       return;
@@ -112,23 +212,24 @@ export function CustomTripForm({ apiEndpoint, fallbackEmail = defaultEmail }: Cu
       noValidate
     >
       <h2 id="custom-trip-heading" className="section-heading">
-        Request a custom trip
+        {copy.heading}
       </h2>
-      <p className="text-sm text-gray-600">
-        Tell us your dates, group size and what you’d like to see. We’ll get back to you shortly.
-      </p>
+      <p className="text-sm text-gray-600">{copy.intro}</p>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="custom-name" className="block text-sm font-medium text-alpine-dark">
-            Name <span className="text-red-600" aria-hidden>*</span>
+            {copy.labels.name} <span className="text-red-600" aria-hidden>*</span>
           </label>
           <input
             id="custom-name"
             type="text"
             required
             value={formData.name}
-            onChange={(e) => { setFormData((p) => ({ ...p, name: e.target.value })); setFieldErrors((err) => ({ ...err, name: '' })); }}
+            onChange={(e) => {
+              setFormData((p) => ({ ...p, name: e.target.value }));
+              setFieldErrors((err) => ({ ...err, name: '' }));
+            }}
             className={inputClassName('name')}
             autoComplete="name"
             aria-invalid={!!fieldErrors.name}
@@ -142,14 +243,17 @@ export function CustomTripForm({ apiEndpoint, fallbackEmail = defaultEmail }: Cu
         </div>
         <div>
           <label htmlFor="custom-email" className="block text-sm font-medium text-alpine-dark">
-            Email <span className="text-red-600" aria-hidden>*</span>
+            {copy.labels.email} <span className="text-red-600" aria-hidden>*</span>
           </label>
           <input
             id="custom-email"
             type="email"
             required
             value={formData.email}
-            onChange={(e) => { setFormData((p) => ({ ...p, email: e.target.value })); setFieldErrors((err) => ({ ...err, email: '' })); }}
+            onChange={(e) => {
+              setFormData((p) => ({ ...p, email: e.target.value }));
+              setFieldErrors((err) => ({ ...err, email: '' }));
+            }}
             className={inputClassName('email')}
             autoComplete="email"
             aria-invalid={!!fieldErrors.email}
@@ -165,7 +269,7 @@ export function CustomTripForm({ apiEndpoint, fallbackEmail = defaultEmail }: Cu
 
       <div>
         <label htmlFor="custom-phone" className="block text-sm font-medium text-alpine-dark">
-          Phone <span className="text-red-600" aria-hidden>*</span>
+          {copy.labels.phone} <span className="text-red-600" aria-hidden>*</span>
         </label>
         <input
           id="custom-phone"
@@ -175,7 +279,7 @@ export function CustomTripForm({ apiEndpoint, fallbackEmail = defaultEmail }: Cu
           onChange={(e) => handlePhoneChange(e.target.value)}
           className={inputClassName('phone')}
           autoComplete="tel"
-          placeholder="e.g. 3541234567 or +3541234567"
+          placeholder={copy.placeholders.phone}
           aria-invalid={!!fieldErrors.phone}
           aria-describedby={fieldErrors.phone ? 'custom-phone-error' : undefined}
         />
@@ -189,7 +293,7 @@ export function CustomTripForm({ apiEndpoint, fallbackEmail = defaultEmail }: Cu
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="custom-date" className="block text-sm font-medium text-alpine-dark">
-            Preferred date <span className="text-red-600" aria-hidden>*</span>
+            {copy.labels.preferredDate} <span className="text-red-600" aria-hidden>*</span>
           </label>
           <input
             id="custom-date"
@@ -198,7 +302,10 @@ export function CustomTripForm({ apiEndpoint, fallbackEmail = defaultEmail }: Cu
             min="2026-05-01"
             max="2026-09-30"
             value={formData.preferredDate}
-            onChange={(e) => { setFormData((p) => ({ ...p, preferredDate: e.target.value })); setFieldErrors((err) => ({ ...err, preferredDate: '' })); }}
+            onChange={(e) => {
+              setFormData((p) => ({ ...p, preferredDate: e.target.value }));
+              setFieldErrors((err) => ({ ...err, preferredDate: '' }));
+            }}
             className={inputClassName('preferredDate')}
             aria-invalid={!!fieldErrors.preferredDate}
             aria-describedby={fieldErrors.preferredDate ? 'custom-date-error' : undefined}
@@ -211,15 +318,18 @@ export function CustomTripForm({ apiEndpoint, fallbackEmail = defaultEmail }: Cu
         </div>
         <div>
           <label htmlFor="custom-group" className="block text-sm font-medium text-alpine-dark">
-            Group size <span className="text-red-600" aria-hidden>*</span>
+            {copy.labels.groupSize} <span className="text-red-600" aria-hidden>*</span>
           </label>
           <input
             id="custom-group"
             type="text"
             required
             value={formData.groupSize}
-            onChange={(e) => { setFormData((p) => ({ ...p, groupSize: e.target.value })); setFieldErrors((err) => ({ ...err, groupSize: '' })); }}
-            placeholder="e.g. 6 adults, 2 children"
+            onChange={(e) => {
+              setFormData((p) => ({ ...p, groupSize: e.target.value }));
+              setFieldErrors((err) => ({ ...err, groupSize: '' }));
+            }}
+            placeholder={copy.placeholders.groupSize}
             className={inputClassName('groupSize')}
             aria-invalid={!!fieldErrors.groupSize}
             aria-describedby={fieldErrors.groupSize ? 'custom-group-error' : undefined}
@@ -234,7 +344,7 @@ export function CustomTripForm({ apiEndpoint, fallbackEmail = defaultEmail }: Cu
 
       <div>
         <label htmlFor="custom-interests" className="block text-sm font-medium text-alpine-dark">
-          Interests (e.g. caves, puffins, photography)
+          {copy.labels.interests}
         </label>
         <input
           id="custom-interests"
@@ -247,7 +357,7 @@ export function CustomTripForm({ apiEndpoint, fallbackEmail = defaultEmail }: Cu
 
       <div>
         <label htmlFor="custom-notes" className="block text-sm font-medium text-alpine-dark">
-          Notes
+          {copy.labels.notes}
         </label>
         <textarea
           id="custom-notes"
@@ -260,17 +370,17 @@ export function CustomTripForm({ apiEndpoint, fallbackEmail = defaultEmail }: Cu
 
       {status === 'success' && (
         <p className="rounded-lg bg-green-50 p-3 text-sm text-green-800" role="status">
-          Thanks! We’ll be in touch soon.
+          {copy.success}
         </p>
       )}
       {status === 'error' && (
         <p className="rounded-lg bg-red-50 p-3 text-sm text-red-800" role="alert">
-          {fieldErrors._form ? `${fieldErrors._form} ` : 'Something went wrong. '}
-          Please email us at{' '}
+          {fieldErrors._form ? `${fieldErrors._form} ` : copy.errorGeneric}
+          {copy.errorEmailPrompt}{' '}
           <a href={`mailto:${fallbackEmail}`} className="font-medium underline">
             {fallbackEmail}
-          </a>
-          {' '}or{' '}
+          </a>{' '}
+          {copy.errorOr}{' '}
           <a href="mailto:booking@islandadventures.com" className="font-medium underline">
             booking@islandadventures.com
           </a>
@@ -283,7 +393,7 @@ export function CustomTripForm({ apiEndpoint, fallbackEmail = defaultEmail }: Cu
         disabled={status === 'sending'}
         className="btn-primary w-full sm:w-auto disabled:opacity-70"
       >
-        {status === 'sending' ? 'Sending…' : useMailto ? 'Open email to send' : 'Send request'}
+        {status === 'sending' ? copy.submitSending : useMailto ? copy.submitMailto : copy.submitSend}
       </button>
     </form>
   );

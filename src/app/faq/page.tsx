@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const FAQ_ITEMS = [
   {
     q: 'Is there a minimum number of people for a tour?',
-    a: 'Our scheduled 1-hour and 2-hour tours have a minimum of 4 persons. If the minimum is not met, we will cancel the tour and offer you a full refund or an alternative date (subject to availability), in line with our cancellation policy. Private charters and custom trips are not subject to this minimum.',
+    a: 'Our scheduled 1-hour and 2-hour tours have a minimum of 4 persons. If the minimum is not met, we will cancel the tour and offer you a full refund or an alternative date (subject to availability), in line with our cancellation policy. Private charters and luxury trips are not subject to this minimum.',
   },
   {
     q: 'What if the weather is bad?',

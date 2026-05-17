@@ -4,7 +4,7 @@ import { CustomTripForm } from '@/components/CustomTripForm';
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: 'Contact Island Adventures for RIB boat tours, custom trips and inquiries. Vestmannaeyjar, Iceland.',
+  description: 'Contact Island Adventures for RIB boat tours, luxury trips and inquiries. Vestmannaeyjar, Iceland.',
 };
 
 export default function ContactPage() {
@@ -12,7 +12,7 @@ export default function ContactPage() {
     <article className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
       <h1 className="text-3xl font-bold text-alpine-dark sm:text-4xl">Contact</h1>
       <p className="mt-4 text-gray-600">
-        Questions or custom trip requests? We can arrange luxury trips with catering, hen and stag parties, and everything in between. Email us at{' '}
+        Questions or luxury trip requests? We can arrange experiences with catering, hen and stag parties, and everything in between. Email us at{' '}
         <a href="mailto:booking@islandadventures.is" className="text-alpine font-medium underline hover:text-alpine-light">
           booking@islandadventures.is
         </a>{' '}

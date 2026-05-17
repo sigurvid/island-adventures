@@ -3,7 +3,26 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 
-export type CarouselImage = { src: string; alt: string };
+export type CarouselImage = {
+  src: string;
+  alt: string;
+  /** Hero only: overrides global `heroBackgroundPosition` for this slide (e.g. `center 72%` to show less sky). */
+  backgroundPosition?: string;
+};
+
+/** Darkens only the lower part of the hero so the photo stays bright above the headline. */
+function HeroBottomScrim() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 z-[2]"
+      style={{
+        background:
+          'linear-gradient(to top, rgba(15, 23, 42, 0.82) 0%, rgba(15, 23, 42, 0.42) 18%, rgba(15, 23, 42, 0.14) 38%, transparent 52%, transparent 100%)',
+      }}
+      aria-hidden
+    />
+  );
+}
 
 type ImageCarouselProps = {
   images: CarouselImage[];
@@ -16,6 +35,8 @@ type ImageCarouselProps = {
   aspectClass?: string;
   /** Optional: show as background-style hero (no Image component, use bg-cover divs). Use when images must fill viewport. */
   variant?: 'default' | 'hero';
+  /** Background position for hero (e.g. `center 38%`). Tweak so boats/cliffs sit mostly above the bottom text band. */
+  heroBackgroundPosition?: string;
 };
 
 export function ImageCarousel({
@@ -25,6 +46,7 @@ export function ImageCarousel({
   sizes = '(max-width: 1024px) 100vw, 1024px',
   aspectClass = 'aspect-[4/3]',
   variant = 'default',
+  heroBackgroundPosition = 'center 38%',
 }: ImageCarouselProps) {
   const [index, setIndex] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -55,17 +77,18 @@ export function ImageCarousel({
     const img = images[0];
     if (variant === 'hero') {
       return (
-        <div
-          className={`absolute inset-0 bg-cover bg-center bg-no-repeat ${className}`}
-          style={{ backgroundImage: `url(${img.src})` }}
-          role="img"
-          aria-label={img.alt}
-        />
+        <div className={`absolute inset-0 overflow-hidden ${className}`} role="img" aria-label={img.alt}>
+          <div
+            className="absolute inset-0 bg-cover bg-no-repeat"
+            style={{ backgroundImage: `url(${img.src})`, backgroundPosition: img.backgroundPosition ?? heroBackgroundPosition }}
+          />
+          <HeroBottomScrim />
+        </div>
       );
     }
     return (
       <div className={`relative overflow-hidden ${aspectClass} ${className}`}>
-        <Image src={img.src} alt={img.alt} fill className="object-cover" sizes={sizes} priority />
+        <Image src={img.src} alt={img.alt} fill className="object-cover object-center" sizes={sizes} priority />
       </div>
     );
   }
@@ -76,54 +99,22 @@ export function ImageCarousel({
         className={`absolute inset-0 overflow-hidden ${className}`}
         role="region"
         aria-label="Hero gallery"
+        aria-live="polite"
       >
         {images.map((img, i) => (
           <div
             key={img.src + i}
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-500"
+            className="absolute inset-0 bg-cover bg-no-repeat transition-opacity duration-500"
             style={{
               backgroundImage: `url(${img.src})`,
+              backgroundPosition: img.backgroundPosition ?? heroBackgroundPosition,
               opacity: i === index ? 1 : 0,
               zIndex: i === index ? 1 : 0,
             }}
             aria-hidden={i !== index}
           />
         ))}
-        <div className="absolute inset-0 bg-gray-900/60 bg-blend-darken" aria-hidden />
-        <button
-          type="button"
-          onClick={() => go(-1)}
-          className="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/90 p-2 text-alpine shadow hover:bg-white focus:outline focus:ring-2 focus:ring-white"
-          aria-label="Previous image"
-        >
-          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <button
-          type="button"
-          onClick={() => go(1)}
-          className="absolute right-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/90 p-2 text-alpine shadow hover:bg-white focus:outline focus:ring-2 focus:ring-white"
-          aria-label="Next image"
-        >
-          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-        <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 gap-2">
-          {images.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setIndex(i)}
-              className={`h-2 w-2 rounded-full transition-colors ${
-                i === index ? 'bg-white' : 'bg-white/50 hover:bg-white/70'
-              }`}
-              aria-label={`Go to image ${i + 1}`}
-              aria-current={i === index ? 'true' : undefined}
-            />
-          ))}
-        </div>
+        <HeroBottomScrim />
       </div>
     );
   }
@@ -133,6 +124,7 @@ export function ImageCarousel({
       className={`relative overflow-hidden ${aspectClass} ${className}`}
       role="region"
       aria-label="Image gallery"
+      aria-live="polite"
       onKeyDown={(e) => {
         if (e.key === 'ArrowLeft') go(-1);
         if (e.key === 'ArrowRight') go(1);
@@ -144,50 +136,16 @@ export function ImageCarousel({
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
         {images.map((img, i) => (
-          <div key={img.src + i} className="relative h-full min-w-full flex-shrink-0">
+          <div key={img.src + i} className="relative h-full min-w-full shrink-0">
             <Image
               src={img.src}
               alt={img.alt}
               fill
-              className="object-cover"
+              className="object-cover object-center"
               sizes={sizes}
               priority={i === 0}
             />
           </div>
-        ))}
-      </div>
-      <button
-        type="button"
-        onClick={() => go(-1)}
-        className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-1.5 text-alpine shadow hover:bg-white focus:outline focus:ring-2 focus:ring-alpine"
-        aria-label="Previous image"
-      >
-        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      <button
-        type="button"
-        onClick={() => go(1)}
-        className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-1.5 text-alpine shadow hover:bg-white focus:outline focus:ring-2 focus:ring-alpine"
-        aria-label="Next image"
-      >
-        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-      <div className="absolute bottom-2 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
-        {images.map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => setIndex(i)}
-            className={`h-1.5 w-1.5 rounded-full transition-colors ${
-              i === index ? 'bg-alpine' : 'bg-gray-400 hover:bg-gray-600'
-            }`}
-            aria-label={`Go to image ${i + 1}`}
-            aria-current={i === index ? 'true' : undefined}
-          />
         ))}
       </div>
     </div>

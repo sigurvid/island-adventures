@@ -4,18 +4,18 @@ import { ImageCarousel } from '@/components/ImageCarousel';
 import { CustomTripForm } from '@/components/CustomTripForm';
 
 export const metadata: Metadata = {
-  title: 'Custom Trips',
+  title: 'Luxury trips',
   description:
-    'Tailored RIB experiences from Vestmannaeyjar: luxury trips with catering, hen and stag parties, longer or custom itineraries. Tell us what you have in mind.',
+    'Tailored luxury RIB experiences from Vestmannaeyjar: catering, celebrations, longer or bespoke itineraries. Tell us what you have in mind.',
   openGraph: {
-    title: 'Custom Trips | Island Adventures',
-    description: 'Tailored RIB experiences: luxury with catering, hen/stag parties, longer or custom itineraries. Vestmannaeyjar.',
+    title: 'Luxury trips | Island Adventures',
+    description: 'Tailored luxury RIB experiences: catering, celebrations, longer or bespoke itineraries. Vestmannaeyjar.',
   },
 };
 
 /** Add or remove image paths to change the tour page gallery. */
 const IMAGES = [
-  { src: '/images/tour-custom.jpg', alt: 'Custom RIB trip Westman Islands' },
+  { src: '/images/tour-custom.jpg', alt: 'Luxury RIB experience Westman Islands' },
 ];
 
 export default function CustomTripPage() {
@@ -29,13 +29,13 @@ export default function CustomTripPage() {
           sizes="(max-width: 1024px) 100vw, 1024px"
         />
       </div>
-      <h1 className="mt-8 text-3xl font-bold text-alpine-dark sm:text-4xl">Custom trips</h1>
+      <h1 className="mt-8 text-3xl font-bold text-alpine-dark sm:text-4xl">Luxury trips</h1>
       <p className="mt-4 text-lg text-gray-600">
-        Whatever you have in mind: luxury trips with catering, hen and stag parties, longer or tailored itineraries — we can cater to it all. Unlike private charters (same 1h/2h tour, your group only), custom trips are built around you. Tell us your ideas and we’ll help you plan something unique.
+        Whatever you have in mind — catering on the water, a standout company outing, a stag or hen weekend upgrade, or a longer bespoke route — we build the trip around you. Unlike private charters (our classic 1-hour or 2-hour tour, your group only), luxury trips are tailored itineraries. Tell us your ideas and we’ll help you plan something unique.
       </p>
       <div className="mt-6 space-y-4 text-gray-700">
         <p>
-          From a special celebration with food and drinks on the water to a full-day exploration of the Westman Islands, or a bespoke route designed around your interests — we work with you to create the trip you want. No two custom trips are the same.
+          From a special celebration with food and drinks on the water to a full-day exploration of the Westman Islands, or a bespoke route designed around your interests — we work with you to create the trip you want. No two luxury trips are the same.
         </p>
       </div>
       <div className="mt-8 flex flex-wrap gap-4">

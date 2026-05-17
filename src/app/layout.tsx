@@ -18,8 +18,13 @@ export const metadata: Metadata = {
     default: 'Island Adventures | RIB Boat Tours — Vestmannaeyjar, Iceland',
     template: '%s | Island Adventures',
   },
+  icons: {
+    icon: [{ url: '/logo.png', type: 'image/png' }],
+    apple: [{ url: '/logo.png', type: 'image/png' }],
+    shortcut: '/logo.png',
+  },
   description:
-    'Explore the Westman Islands by RIB boat. Sea caves, cliffs & wildlife. 1-hour & 2-hour tours, private charters & custom trips. Book your adventure May–October.',
+    'Explore the Westman Islands by RIB boat. Sea caves, cliffs & wildlife. 1-hour & 2-hour tours, private charters & luxury trips. Book your adventure May–October.',
   keywords: ['RIB boat', 'Vestmannaeyjar', 'Westman Islands', 'Iceland', 'boat tour', 'sea caves', 'wildlife'],
   openGraph: {
     type: 'website',

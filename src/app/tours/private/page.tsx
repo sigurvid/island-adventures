@@ -5,10 +5,10 @@ import { ImageCarousel } from '@/components/ImageCarousel';
 export const metadata: Metadata = {
   title: 'Private RIB Charters',
   description:
-    'The same 1-hour or 2-hour RIB tours as our scheduled trips — just for your group. Vestmannaeyjar sea caves, cliffs and wildlife. By inquiry.',
+    'Private RIB charters from Vestmannaeyjar for teams, stag and hen groups, and celebrations — same 1-hour or 2-hour coastal adventure, your boat only. By inquiry.',
   openGraph: {
     title: 'Private RIB Charters | Island Adventures',
-    description: 'Same 1-hour or 2-hour RIB tours as scheduled — just for your group. Vestmannaeyjar.',
+    description: 'Private RIB charters for teams and groups — same epic tour, your pace. Vestmannaeyjar.',
   },
 };
 
@@ -30,9 +30,11 @@ export default function PrivateTourPage() {
       </div>
       <h1 className="mt-8 text-3xl font-bold text-alpine-dark sm:text-4xl">Private charters</h1>
       <p className="mt-4 text-lg text-gray-600">
-        The same 1-hour or 2-hour RIB tours as our scheduled trips — just for your group only. Same sea caves, cliffs and wildlife; you choose the time. Perfect for families and small groups who want the boat to themselves.
+        Treat your team to something they will actually remember: the same high-energy 1-hour or 2-hour RIB route as our scheduled tours — sea caves, cliffs and wildlife — but with the boat reserved for your company, your stag or hen crew, or your whole group. You pick the vibe; we handle safety, gear and a captain who knows every corner of the islands.
       </p>
-      <p className="mt-4 text-gray-600">Private charters are not bookable online. We offer them only when you contact us directly.</p>
+      <p className="mt-4 text-gray-600">
+        Private charters are not bookable online. Tell us your dates, headcount and occasion and we’ll put together a quote and a departure window that works for you.
+      </p>
       <div className="mt-8 flex flex-wrap gap-4">
         <Link href="/contact#custom" className="btn-primary">
           Contact us to arrange a private charter
