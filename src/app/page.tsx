@@ -219,11 +219,37 @@ export default function HomePage() {
           <p className="mt-4 text-sm text-gray-600">
             Tours are weather-dependent. See our <Link href="/faq" className="text-alpine font-medium underline">FAQ</Link> and <Link href="/terms" className="text-alpine font-medium underline">Terms & Cancellation</Link> for cancellation and meeting point details.
           </p>
-          <div className="mt-8 rounded-xl border border-alpine/15 bg-gray-50 p-6">
-            <h3 className="font-semibold text-alpine-dark">Your guides</h3>
-            <p className="mt-2 text-gray-700">
-              Our guides are knowledgeable, welcoming, and safety-focused. They’re great at bringing each tour to life with clear storytelling and genuine local insight. Our captains have years of experience and the qualifications to keep your trip both memorable and safe.
+          <div className="mt-10">
+            <h3 className="text-lg font-bold text-alpine-dark sm:text-xl">Meet your captains</h3>
+            <p className="mt-2 max-w-2xl text-sm text-gray-600">
+              Licensed, experienced and safety-focused — and great at bringing the islands to life with local stories. Your trip is in good hands.
             </p>
+            {/* TODO: replace placeholders with each captain's real name, photo, credentials & a short bio. */}
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { name: 'Captain name', role: 'Licensed skipper' },
+                { name: 'Captain name', role: 'Licensed skipper' },
+                { name: 'Captain name', role: 'Licensed skipper' },
+                { name: 'Captain name', role: 'Licensed skipper' },
+              ].map((cap, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col items-center rounded-xl border border-alpine/15 bg-gray-50 p-5 text-center shadow-sm"
+                >
+                  {/* Placeholder portrait — swap for a real photo (use next/image with descriptive alt). */}
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-alpine/10 text-alpine" aria-hidden>
+                    <svg className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a7.5 7.5 0 0 1 15 0" />
+                    </svg>
+                  </div>
+                  <h4 className="mt-3 font-semibold text-alpine-dark">{cap.name}</h4>
+                  <p className="mt-0.5 text-sm font-medium text-alpine">{cap.role}</p>
+                  <p className="mt-2 text-sm text-gray-600">
+                    Years on Vestmannaeyjar waters. Short bio goes here — experience, certifications and what they love about the tour.
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

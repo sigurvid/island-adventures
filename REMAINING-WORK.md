@@ -55,6 +55,18 @@ in `src/components/Header.tsx`). Before turning it on, a native speaker should r
   `einmana/partý` (reads as "lonely/party" — likely meant private/stag party).
 - [ ] 🟢 Decide **when to enable the IS toggle** and announce the Icelandic site.
 
+## 3c. "Meet your captains" / About page 👤 💻
+The homepage "Your guides" blurb is now a **"Meet your captains" row of 4 placeholder
+cards** (`src/app/page.tsx`, in the Safety section). To finish:
+- [ ] 🟠 👤 **Provide the 4 captains' details** — real name, photo, role/credentials
+  (e.g. licensed skipper, years on the water, languages) and a 1–2 sentence bio. Swap the
+  silhouette placeholder for a real photo via `next/image` with descriptive alt text.
+- [ ] 🟠 💻 **Mirror the section on the Icelandic home** (`/is`) — it still shows the old
+  single "guides" paragraph (`src/content/is/home.ts`), so EN/IS are out of sync.
+- [ ] 🟢 💻 **Add a dedicated `/about` (team) page** as the canonical home for fuller bios
+  + `Person` schema; keep the homepage section as a teaser linking to it, and add "About"
+  to the header nav and footer. Strengthens E-E-A-T/trust for a safety-sensitive activity.
+
 ## 4. Functional verification before launch 💻
 Things we could not fully test locally (no live keys / static export):
 - [ ] 🔴 **Contact / luxury-trip form actually sends** — needs a real `RESEND_API_KEY`
@@ -116,7 +128,9 @@ From the original SEO audit recommendations:
   Google Maps embed click-to-load (facade).
 - UX: 44px tap targets, skip-to-content link, reduced-motion, equal-height tour cards with
   bottom-aligned full-width buttons, "By inquiry" label on both inquiry-only cards.
-- Content: rewrote the Private / Luxury / 2-hour card blurbs to match their detail pages.
+- Content: rewrote the Private / Luxury / 2-hour card blurbs to match their detail pages;
+  replaced the generic "Your guides" blurb with a "Meet your captains" row of 4 placeholder
+  cards (awaiting real names/photos/bios — see §3c).
 - Bug: removed wrong-domain `.com` contact link; fixed `[DATE]` placeholder.
 - Legal: governing law, liability carve-out, VAT clarity, withdrawal exemption (Terms);
   controller/retention/processor/rights fixes (Privacy); Ferðamálastofa spelling (footer).
