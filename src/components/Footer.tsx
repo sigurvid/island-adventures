@@ -15,7 +15,7 @@ const legalPlaceholders = {
   vatNumber: '159911',
   email: 'booking@islandadventures.is',
   phone: '+354 865 5700',
-  licensingInfo: 'Ferdamálastofa — Authorized Day Tour Provider (Licence 2026-045)',
+  licensingInfo: 'Ferðamálastofa — Authorized Day Tour Provider (Licence 2026-045)',
   dayTourProvidersListUrl:
     'https://www.ferdamalastofa.is/en/licences-legislation/valid-licences/list-of-day-tour-providers',
 };
@@ -113,7 +113,7 @@ export function Footer() {
                 >
                   <Image
                     src="/images/tourist-board-licence-2026-045.png"
-                    alt="Ferdamálastofa — Authorized Day Tour Provider licence badge (2026-045)"
+                    alt="Ferðamálastofa — Authorized Day Tour Provider licence badge (2026-045)"
                     width={260}
                     height={260}
                     className="h-auto w-[180px] rounded-lg bg-white p-2"

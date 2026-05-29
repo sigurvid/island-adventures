@@ -43,11 +43,12 @@ export default function PrivacyPage() {
         </p>
         <p>
           <strong>7. Your rights</strong><br />
-          right to access, rectify, erase, restrict, port, object; right to complain to the Icelandic Data Protection Authority (Persónuvernd) or relevant supervisory authority.
+          right to access, rectify, erase, restrict, port, object; right to complain to the Icelandic Data Protection Authority (Persónuvernd) or relevant supervisory authority. To exercise any of these rights, contact us at booking@islandadventures.is.
         </p>
+        {/* TODO (legal — needs your facts): name the specific analytics tool (e.g. Google Analytics 4) and make sure it matches the cookie banner. */}
         <p>
           <strong>8. Cookies</strong><br />
-          we use only essential cookies; if analytics are enabled, we use [X] and you can withdraw consent via cookie banner/settings.
+          We use only essential cookies by default. If you enable analytics, we use a website-analytics tool to understand how the site is used; you can withdraw consent at any time via the cookie banner or settings.
         </p>
         <p>
           <strong>9. Changes</strong><br />
