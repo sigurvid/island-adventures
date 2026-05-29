@@ -43,7 +43,7 @@ export function TourCard({
       : [];
 
   return (
-    <article className="overflow-hidden rounded-xl border border-alpine/15 bg-white shadow-sm transition hover:shadow-md">
+    <article className="flex h-full flex-col overflow-hidden rounded-xl border border-alpine/15 bg-white shadow-sm transition hover:shadow-md">
       <Link href={slug} className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine rounded-xl">
         <div className="relative aspect-[4/3] bg-gray-200">
           {images.length > 1 ? (
@@ -67,7 +67,7 @@ export function TourCard({
           </span>
         </div>
       </Link>
-      <div className="p-4 sm:p-5">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
         <h2 className="text-lg font-bold text-alpine-dark">
           <Link href={slug} className="hover:text-alpine focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine rounded">
             {title}
@@ -81,11 +81,11 @@ export function TourCard({
               : `${pricePrefix ?? 'From '}${fromPrice}`}
           </p>
         )}
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Link href={ctaHref} className="btn-primary min-h-11 text-sm py-2 px-4">
+        <div className="mt-auto flex flex-col gap-2 pt-4">
+          <Link href={ctaHref} className="btn-primary min-h-11 w-full text-sm py-2 px-4">
             {ctaLabel}
           </Link>
-          <Link href={slug} className="btn-secondary min-h-11 text-sm py-2 px-4">
+          <Link href={slug} className="btn-secondary min-h-11 w-full text-sm py-2 px-4">
             {detailsLabel}
           </Link>
         </div>
