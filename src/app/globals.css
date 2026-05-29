@@ -44,3 +44,14 @@
   background-size: cover;
   background-position: center;
 }
+
+/*
+ * Bókun injects its cart/widgets root as a direct child of <body>, which is a
+ * flex column — that pushed the page and caused a large layout shift (CLS).
+ * Taking the injected root out of normal flow stops it affecting page layout;
+ * Bókun positions its own cart bubble internally.
+ */
+body > #bokun-widgets-root {
+  position: fixed;
+  inset: auto;
+}

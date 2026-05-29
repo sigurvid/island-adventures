@@ -5,9 +5,10 @@ import { readdir, stat, rename, unlink } from 'node:fs/promises';
 import path from 'node:path';
 
 const DIR = path.join(process.cwd(), 'public', 'images');
-const MAX_W = 2000;      // cap width
 const QUALITY = 80;      // mozjpeg quality
-const THRESHOLD = 300 * 1024; // only touch files > 300 KB
+const THRESHOLD = 200 * 1024; // only touch files > 200 KB
+// Cap width by role: hero shows full-bleed (larger), tour/card images display small.
+const maxWidthFor = (name) => (/^hero/i.test(name) ? 1600 : 1280);
 
 const files = await readdir(DIR);
 let savedTotal = 0;
@@ -23,7 +24,7 @@ for (const f of files) {
   const tmp = fp + '.tmp';
   await sharp(fp)
     .rotate()
-    .resize({ width: MAX_W, withoutEnlargement: true })
+    .resize({ width: maxWidthFor(f), withoutEnlargement: true })
     .jpeg({ quality: QUALITY, mozjpeg: true })
     .toFile(tmp);
   const after = (await stat(tmp)).size;

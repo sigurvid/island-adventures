@@ -11,6 +11,7 @@ import {
   isHomeTourCards,
 } from '@/content/is/home';
 import { LocalBusinessJsonLd, TourJsonLd } from '@/components/JsonLd';
+import { BokunWidget } from '@/components/BokunWidget';
 import { alternates } from '@/lib/seo';
 
 export const metadata: Metadata = { ...isHomeMetadata, alternates: alternates('/', true) };
@@ -87,13 +88,7 @@ export default function IcelandicHomePage() {
             </Link>
             {c.bookCalloutEnd}
           </p>
-          <div className="rounded-xl border border-alpine/20 bg-white p-4 shadow-sm sm:p-6">
-            <div
-              className="bokunWidget"
-              data-src="https://widgets.bokun.io/online-sales/ce638209-9fde-496b-95b4-c57690eb5091/experience-calendar/1170125"
-            />
-            <noscript>{c.noscriptBook}</noscript>
-          </div>
+          <BokunWidget noscriptText={c.noscriptBook} />
           <p className="mt-6 text-sm text-gray-500">
             {c.bookFooterBefore}
             <Link href="/is/tours/custom/" className="text-alpine font-medium underline hover:text-alpine-light">

@@ -22,7 +22,7 @@ export default function TermsPage() {
         </p>
         <p>
           <strong>2. Booking & payment</strong><br />
-          A booking is confirmed when payment has been received. Prices are in Icelandic krónur (ISK) unless otherwise stated. The price includes the tour as described (e.g. 1-hour or 2-hour RIB tour), use of a float suit and life vest, and any safety equipment we provide. Any other items not listed are not included. We reserve the right to correct pricing errors.
+          A booking is confirmed when payment has been received. Prices are in Icelandic krónur (ISK) and include VAT unless otherwise stated. The price includes the tour as described (e.g. 1-hour or 2-hour RIB tour), use of a float suit and life vest, and any safety equipment we provide. Any other items not listed are not included. We reserve the right to correct pricing errors.
         </p>
         <p>
           <strong>2a. Minimum group size (scheduled tours)</strong><br />
@@ -30,7 +30,7 @@ export default function TermsPage() {
         </p>
         <p>
           <strong>3. Cancellation by you</strong><br />
-          If you cancel at least <strong>1 week (7 days)</strong> before the scheduled departure time, you are entitled to a full refund. If you cancel between 1 week and <strong>72 hours</strong> before departure, we will refund <strong>50%</strong> of the tour price. Cancellations made with less than 72 hours before departure are <strong>non-refundable</strong>. All cancellations must be sent to us in writing (e.g. by email to booking@islandadventures.is). We recommend that you take out travel insurance to cover illness or other unforeseen circumstances that prevent you from travelling.
+          If you cancel at least <strong>1 week (7 days)</strong> before the scheduled departure time, you are entitled to a full refund. If you cancel between 1 week and <strong>72 hours</strong> before departure, we will refund <strong>50%</strong> of the tour price. Cancellations made with less than 72 hours before departure are <strong>non-refundable</strong>. All cancellations must be sent to us in writing (e.g. by email to booking@islandadventures.is). We recommend that you take out travel insurance to cover illness or other unforeseen circumstances that prevent you from travelling. Because our tours are leisure activities provided on a specific date, the statutory 14-day right of withdrawal for distance contracts does not apply; the cancellation terms above apply instead.
         </p>
         <p>
           <strong>4. Cancellation or changes by us (weather & safety)</strong><br />
@@ -46,7 +46,7 @@ export default function TermsPage() {
         </p>
         <p>
           <strong>7. Liability</strong><br />
-          We carry appropriate insurance for our operations. Participation in our tours is at your own risk to the extent permitted by applicable law. We are not liable for loss or damage arising from circumstances beyond our control (e.g. weather, force majeure, or your failure to follow instructions). We are not liable for indirect or consequential loss. We strongly recommend that you have travel insurance, including for medical and cancellation cover.
+          We carry appropriate insurance for our operations. Participation in our tours is at your own risk to the extent permitted by applicable law. We are not liable for loss or damage arising from circumstances beyond our control (e.g. weather, force majeure, or your failure to follow instructions). We are not liable for indirect or consequential loss. Nothing in these terms excludes or limits our liability for death or personal injury caused by our negligence, or any other liability that cannot be excluded or limited under applicable law. We strongly recommend that you have travel insurance, including for medical and cancellation cover.
         </p>
         <p>
           <strong>8. Complaints</strong><br />
@@ -55,6 +55,10 @@ export default function TermsPage() {
         <p>
           <strong>9. Changes to these terms</strong><br />
           We may update these terms from time to time. The “Last updated” date at the top will be revised when we do. Your booking is governed by the terms in effect at the time you made the booking.
+        </p>
+        <p>
+          <strong>10. Governing law &amp; jurisdiction</strong><br />
+          These terms and your booking are governed by the laws of Iceland. Any dispute that cannot be resolved amicably shall be subject to the jurisdiction of the Icelandic courts. Nothing in this clause affects any mandatory consumer-protection rights you have under the law of your country of residence.
         </p>
       </div>
 

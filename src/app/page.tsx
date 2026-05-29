@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { TourCard } from '@/components/TourCard';
 import { ImageCarousel } from '@/components/ImageCarousel';
 import { CustomTripForm } from '@/components/CustomTripForm';
+import { BokunWidget } from '@/components/BokunWidget';
 import { LocalBusinessJsonLd, TourJsonLd } from '@/components/JsonLd';
 import { alternates, og } from '@/lib/seo';
 
@@ -160,13 +161,7 @@ export default function HomePage() {
           <p className="mb-8 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
             Want a <strong>2-hour tour</strong> or a date in <strong>July–September</strong>? <Link href="/contact#custom" className="font-medium underline hover:text-alpine">Contact us</Link> — we’ll get you sorted.
           </p>
-          <div className="rounded-xl border border-alpine/20 bg-white p-4 shadow-sm sm:p-6">
-            <div
-              className="bokunWidget"
-              data-src="https://widgets.bokun.io/online-sales/ce638209-9fde-496b-95b4-c57690eb5091/experience-calendar/1170125"
-            />
-            <noscript>Please enable JavaScript in your browser to book.</noscript>
-          </div>
+          <BokunWidget />
           <p className="mt-6 text-sm text-gray-500">
             Interested in a private charter or luxury trip?{' '}
             <Link href="/tours/custom" className="font-medium text-alpine underline hover:text-alpine-light">

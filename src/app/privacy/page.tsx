@@ -18,7 +18,7 @@ export default function PrivacyPage() {
       <div className="prose-inline mt-8 space-y-6 text-gray-700">
         <p>
           <strong>1. Controller</strong><br />
-          Eyjasund ehf, Básaskersbryggja 6, info@islandadventures.is, 865 5700. . 661021-1520
+          Eyjasund EHF (“Island Adventures”), Básaskersbryggja 6, 900 Vestmannaeyjar, Iceland. Kennitala: 661021-1520. Email: booking@islandadventures.is. Phone: +354 865 5700.
         </p>
         <p>
           <strong>2. What we collect</strong><br />
@@ -34,11 +34,12 @@ export default function PrivacyPage() {
         </p>
         <p>
           <strong>5. Retention</strong><br />
-          We  will retain your data until you delete it or request it to be deleted. Or for a maximum of 1 buisness year after the last interaction with us.
+          We keep your personal data only as long as needed for the purposes above. Booking and payment records are retained for as long as required by Icelandic accounting and tax law (currently seven years). Enquiry and contact data is deleted within a reasonable period after the matter is closed, and earlier on request where we are not legally required to keep it.
         </p>
+        {/* TODO (legal — needs your facts): confirm where Bókun and Resend store/process data. If outside the EEA, disclose the international transfer and the safeguard used (e.g. Standard Contractual Clauses). */}
         <p>
           <strong>6. Sharing</strong><br />
-          booking data shared with Bókun; no sale of data.
+          We share booking data with our booking provider (Bókun) to process your reservation, and details you submit through our forms with our email provider (Resend) to deliver those messages. We do not sell your data.
         </p>
         <p>
           <strong>7. Your rights</strong><br />

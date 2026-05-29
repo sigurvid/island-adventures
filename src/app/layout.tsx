@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/Header';
@@ -52,6 +51,7 @@ export default function RootLayout({
     <html lang="en" className={fontSans.variable}>
       <head>
         <link rel="preconnect" href="https://widgets.bokun.io" crossOrigin="" />
+        <link rel="preconnect" href="https://static.bokun.io" crossOrigin="" />
         <link rel="preload" as="image" href="/images/hero.jpg" fetchPriority="high" />
         <WebSiteJsonLd />
       </head>
@@ -62,10 +62,6 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <Script
-          src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=ce638209-9fde-496b-95b4-c57690eb5091"
-          strategy="afterInteractive"
-        />
         <Header />
         <main id="main-content" className="flex-1">
           {children}
