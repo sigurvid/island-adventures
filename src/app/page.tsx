@@ -68,6 +68,7 @@ const TOUR_CARDS = [
     duration: 'On request',
     imageSrcs: ['/images/tour-custom.jpg'],
     imageAlt: 'Luxury RIB experience Westman Islands',
+    fromPrice: 'By inquiry',
     ctaLabel: 'Request a luxury trip',
     ctaHref: '/tours/custom#request',
   },
