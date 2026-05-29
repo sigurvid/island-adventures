@@ -77,10 +77,16 @@ export function ImageCarousel({
     const img = images[0];
     if (variant === 'hero') {
       return (
-        <div className={`absolute inset-0 overflow-hidden ${className}`} role="img" aria-label={img.alt}>
-          <div
-            className="absolute inset-0 bg-cover bg-no-repeat"
-            style={{ backgroundImage: `url(${img.src})`, backgroundPosition: img.backgroundPosition ?? heroBackgroundPosition }}
+        <div className={`absolute inset-0 overflow-hidden ${className}`}>
+          {/* Real <img> (not a CSS background) so the browser can discover and
+              prioritize it as the LCP element. */}
+          <img
+            src={img.src}
+            alt={img.alt}
+            fetchPriority="high"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ objectPosition: img.backgroundPosition ?? heroBackgroundPosition }}
           />
           <HeroBottomScrim />
         </div>
@@ -102,12 +108,16 @@ export function ImageCarousel({
         aria-live="polite"
       >
         {images.map((img, i) => (
-          <div
+          <img
             key={img.src + i}
-            className="absolute inset-0 bg-cover bg-no-repeat transition-opacity duration-500"
+            src={img.src}
+            alt={img.alt}
+            fetchPriority={i === 0 ? 'high' : undefined}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
             style={{
-              backgroundImage: `url(${img.src})`,
-              backgroundPosition: img.backgroundPosition ?? heroBackgroundPosition,
+              objectPosition: img.backgroundPosition ?? heroBackgroundPosition,
               opacity: i === index ? 1 : 0,
               zIndex: i === index ? 1 : 0,
             }}
