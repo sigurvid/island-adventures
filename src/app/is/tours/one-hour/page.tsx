@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ImageCarousel } from '@/components/ImageCarousel';
 import { isOneHourCopy, isOneHourImages, isOneHourMetadata } from '@/content/is/tour-one-hour';
+import { alternates } from '@/lib/seo';
 
-export const metadata: Metadata = isOneHourMetadata;
+export const metadata: Metadata = { ...isOneHourMetadata, alternates: alternates('/tours/one-hour/', true) };
 
 export default function IcelandicOneHourTourPage() {
   const c = isOneHourCopy;

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { isPrivacyCopy, isPrivacyMetadata } from '@/content/is/privacy';
+import { alternates } from '@/lib/seo';
 
-export const metadata: Metadata = isPrivacyMetadata;
+export const metadata: Metadata = { ...isPrivacyMetadata, alternates: alternates('/privacy/', true) };
 
 export default function IcelandicPrivacyPage() {
   const c = isPrivacyCopy;

@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { FaqJsonLd } from '@/components/JsonLd';
+import { alternates, og, SITE_URL } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'FAQ',
   description: 'Frequently asked questions: weather, gear, meeting point, age limits and health restrictions for Island Adventures RIB tours.',
+  alternates: alternates('/faq/'),
+  openGraph: og('/faq/'),
 };
 
 const FAQ_ITEMS = [
@@ -64,6 +68,7 @@ const FAQ_ITEMS = [
 export default function FAQPage() {
   return (
     <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+      <FaqJsonLd items={FAQ_ITEMS.map((i) => ({ q: i.q, a: i.a }))} id={`${SITE_URL}/faq/#faq`} />
       <h1 className="text-3xl font-bold text-alpine-dark sm:text-4xl">FAQ</h1>
       <p className="mt-2 text-gray-600">
         Weather, gear, meeting point, age limits and more. Full details are in our{' '}

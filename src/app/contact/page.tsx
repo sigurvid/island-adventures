@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CustomTripForm } from '@/components/CustomTripForm';
+import { alternates, og } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Contact',
   description: 'Contact Island Adventures for RIB boat tours, luxury trips and inquiries. Vestmannaeyjar, Iceland.',
+  alternates: alternates('/contact/'),
+  openGraph: og('/contact/'),
 };
 
 export default function ContactPage() {

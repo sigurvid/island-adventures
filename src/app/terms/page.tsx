@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { alternates, og } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Terms & Cancellation Policy',
   description: 'Terms of service and cancellation policy for Island Adventures RIB boat tours.',
+  alternates: alternates('/terms/'),
+  openGraph: og('/terms/'),
 };
 
 export default function TermsPage() {

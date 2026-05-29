@@ -10,14 +10,18 @@ import {
   isHomeMetadata,
   isHomeTourCards,
 } from '@/content/is/home';
+import { LocalBusinessJsonLd, TourJsonLd } from '@/components/JsonLd';
+import { alternates } from '@/lib/seo';
 
-export const metadata: Metadata = isHomeMetadata;
+export const metadata: Metadata = { ...isHomeMetadata, alternates: alternates('/', true) };
 
 export default function IcelandicHomePage() {
   const c = isHomeCopy;
 
   return (
     <>
+      <LocalBusinessJsonLd />
+      <TourJsonLd />
       <section
         className="relative flex min-h-[70vh] flex-col justify-end bg-alpine-dark text-white"
         aria-label={c.heroAriaLabel}

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { isTermsCopy, isTermsMetadata, isTermsSections } from '@/content/is/terms';
+import { alternates } from '@/lib/seo';
 
-export const metadata: Metadata = isTermsMetadata;
+export const metadata: Metadata = { ...isTermsMetadata, alternates: alternates('/terms/', true) };
 
 export default function IcelandicTermsPage() {
   const c = isTermsCopy;

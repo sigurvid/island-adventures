@@ -1,15 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ImageCarousel } from '@/components/ImageCarousel';
+import { BreadcrumbJsonLd } from '@/components/JsonLd';
+import { alternates, og, SITE_URL } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: '1-Hour RIB Tour',
   description:
     'One-hour RIB boat tour from Vestmannaeyjar: sea caves, cliffs and birdlife. 15,000 ISK adult, 9,000 ISK child. Book online. May–October.',
-  openGraph: {
-    title: '1-Hour RIB Tour | Island Adventures',
-    description: 'One-hour RIB boat tour from Vestmannaeyjar: sea caves, cliffs and birdlife. 15,000 ISK adult, 9,000 ISK child.',
-  },
+  alternates: alternates('/tours/one-hour/'),
+  openGraph: { ...og('/tours/one-hour/'), title: '1-Hour RIB Tour | Island Adventures', description: 'One-hour RIB boat tour from Vestmannaeyjar: sea caves, cliffs and birdlife. 15,000 ISK adult, 9,000 ISK child.' },
 };
 
 /** Add or remove image paths to change the tour page gallery. */
@@ -25,6 +25,12 @@ const IMAGES = [
 export default function OneHourTourPage() {
   return (
     <article className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', url: `${SITE_URL}/` },
+          { name: '1-hour RIB tour', url: `${SITE_URL}/tours/one-hour/` },
+        ]}
+      />
       <div className="overflow-hidden rounded-xl bg-gray-200">
         <ImageCarousel
           images={IMAGES}

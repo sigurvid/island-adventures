@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { alternates, og } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: 'Privacy policy for Island Adventures. How we collect, use and protect your data.',
+  alternates: alternates('/privacy/'),
+  openGraph: og('/privacy/'),
 };
 
 export default function PrivacyPage() {

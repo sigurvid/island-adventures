@@ -2,15 +2,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ImageCarousel } from '@/components/ImageCarousel';
 import { CustomTripForm } from '@/components/CustomTripForm';
+import { alternates, og } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Luxury trips',
   description:
     'Tailored luxury RIB experiences from Vestmannaeyjar: catering, celebrations, longer or bespoke itineraries. Tell us what you have in mind.',
-  openGraph: {
-    title: 'Luxury trips | Island Adventures',
-    description: 'Tailored luxury RIB experiences: catering, celebrations, longer or bespoke itineraries. Vestmannaeyjar.',
-  },
+  alternates: alternates('/tours/custom/'),
+  openGraph: { ...og('/tours/custom/'), title: 'Luxury trips | Island Adventures', description: 'Tailored luxury RIB experiences: catering, celebrations, longer or bespoke itineraries. Vestmannaeyjar.' },
 };
 
 /** Add or remove image paths to change the tour page gallery. */

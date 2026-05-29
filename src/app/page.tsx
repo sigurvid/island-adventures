@@ -1,8 +1,15 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { TourCard } from '@/components/TourCard';
 import { ImageCarousel } from '@/components/ImageCarousel';
 import { CustomTripForm } from '@/components/CustomTripForm';
 import { LocalBusinessJsonLd, TourJsonLd } from '@/components/JsonLd';
+import { alternates, og } from '@/lib/seo';
+
+export const metadata: Metadata = {
+  alternates: alternates('/'),
+  openGraph: og('/'),
+};
 
 /** Hero images: add or remove paths to change the hero carousel. Optional `backgroundPosition` per slide (hero only). */
 const HERO_IMAGES = [

@@ -1,15 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ImageCarousel } from '@/components/ImageCarousel';
+import { alternates, og } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: '2-Hour RIB Tour',
   description:
     'Two-hour RIB boat tour from Vestmannaeyjar: more sea caves, longer coastline and wildlife. 22,000 ISK adult, 12,000 ISK child. Book online. May–October.',
-  openGraph: {
-    title: '2-Hour RIB Tour | Island Adventures',
-    description: 'Two-hour RIB boat tour from Vestmannaeyjar: more sea caves and coastline. 22,000 ISK adult, 12,000 ISK child.',
-  },
+  alternates: alternates('/tours/two-hour/'),
+  openGraph: { ...og('/tours/two-hour/'), title: '2-Hour RIB Tour | Island Adventures', description: 'Two-hour RIB boat tour from Vestmannaeyjar: more sea caves and coastline. 22,000 ISK adult, 12,000 ISK child.' },
 };
 
 /** Add or remove image paths to change the tour page gallery. */

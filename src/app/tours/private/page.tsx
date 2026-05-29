@@ -1,15 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ImageCarousel } from '@/components/ImageCarousel';
+import { alternates, og } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Private RIB Charters',
   description:
     'Private RIB charters from Vestmannaeyjar for teams, stag and hen groups, and celebrations — same 1-hour or 2-hour coastal adventure, your boat only. By inquiry.',
-  openGraph: {
-    title: 'Private RIB Charters | Island Adventures',
-    description: 'Private RIB charters for teams and groups — same epic tour, your pace. Vestmannaeyjar.',
-  },
+  alternates: alternates('/tours/private/'),
+  openGraph: { ...og('/tours/private/'), title: 'Private RIB Charters | Island Adventures', description: 'Private RIB charters for teams and groups — same epic tour, your pace. Vestmannaeyjar.' },
 };
 
 /** Add or remove image paths to change the tour page gallery. */

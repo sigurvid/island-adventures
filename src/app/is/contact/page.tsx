@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { CustomTripForm } from '@/components/CustomTripForm';
 import { customTripFormIs } from '@/content/is/custom-trip-form';
 import { isContactCopy, isContactMetadata } from '@/content/is/contact';
+import { alternates } from '@/lib/seo';
 
-export const metadata: Metadata = isContactMetadata;
+export const metadata: Metadata = { ...isContactMetadata, alternates: alternates('/contact/', true) };
 
 export default function IcelandicContactPage() {
   const c = isContactCopy;

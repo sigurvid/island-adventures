@@ -6,6 +6,8 @@ import { Header } from '@/components/Header';
 import { StickyBookNow } from '@/components/StickyBookNow';
 import { Footer } from '@/components/Footer';
 import { CookieBanner } from '@/components/CookieBanner';
+import { WebSiteJsonLd } from '@/components/JsonLd';
+import { SITE_URL, OG_IMAGE } from '@/lib/seo';
 
 const fontSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -14,6 +16,7 @@ const fontSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'Island Adventures | RIB Boat Tours — Vestmannaeyjar, Iceland',
     template: '%s | Island Adventures',
@@ -24,12 +27,18 @@ export const metadata: Metadata = {
     shortcut: '/logo.png',
   },
   description:
-    'Explore the Westman Islands by RIB boat. Sea caves, cliffs & wildlife. 1-hour & 2-hour tours, private charters & luxury trips. Book your adventure May–October.',
+    'RIB boat tours of the Westman Islands, Iceland: sea caves, cliffs and wildlife. 1-hour and 2-hour tours, private charters and luxury trips. May to October.',
   keywords: ['RIB boat', 'Vestmannaeyjar', 'Westman Islands', 'Iceland', 'boat tour', 'sea caves', 'wildlife'],
   openGraph: {
     type: 'website',
     locale: 'en_GB',
     siteName: 'Island Adventures',
+    url: SITE_URL,
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: [OG_IMAGE.url],
   },
   robots: { index: true, follow: true },
 };
@@ -41,6 +50,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={fontSans.variable}>
+      <head>
+        <link rel="preconnect" href="https://widgets.bokun.io" crossOrigin="" />
+        <link rel="preload" as="image" href="/images/hero.jpg" fetchPriority="high" />
+        <WebSiteJsonLd />
+      </head>
       <body className="min-h-screen flex flex-col font-sans">
         <Script
           src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=ce638209-9fde-496b-95b4-c57690eb5091"

@@ -1,13 +1,16 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { isFaqCopy, isFaqItems, isFaqMetadata } from '@/content/is/faq';
+import { FaqJsonLd } from '@/components/JsonLd';
+import { alternates, SITE_URL } from '@/lib/seo';
 
-export const metadata: Metadata = isFaqMetadata;
+export const metadata: Metadata = { ...isFaqMetadata, alternates: alternates('/faq/', true) };
 
 export default function IcelandicFAQPage() {
   const c = isFaqCopy;
   return (
     <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
+      <FaqJsonLd items={isFaqItems.map((i) => ({ q: i.q, a: i.a }))} id={`${SITE_URL}/is/faq/#faq`} />
       <h1 className="text-3xl font-bold text-alpine-dark sm:text-4xl">{c.title}</h1>
       <p className="mt-2 text-gray-600">
         {c.introBefore}

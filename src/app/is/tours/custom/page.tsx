@@ -4,8 +4,9 @@ import { ImageCarousel } from '@/components/ImageCarousel';
 import { CustomTripForm } from '@/components/CustomTripForm';
 import { customTripFormIs } from '@/content/is/custom-trip-form';
 import { isCustomCopy, isCustomImages, isCustomMetadata } from '@/content/is/tour-custom';
+import { alternates } from '@/lib/seo';
 
-export const metadata: Metadata = isCustomMetadata;
+export const metadata: Metadata = { ...isCustomMetadata, alternates: alternates('/tours/custom/', true) };
 
 export default function IcelandicCustomTourPage() {
   const c = isCustomCopy;

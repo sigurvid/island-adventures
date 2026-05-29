@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ImageCarousel } from '@/components/ImageCarousel';
 import { isPrivateCopy, isPrivateImages, isPrivateMetadata } from '@/content/is/tour-private';
+import { alternates } from '@/lib/seo';
 
-export const metadata: Metadata = isPrivateMetadata;
+export const metadata: Metadata = { ...isPrivateMetadata, alternates: alternates('/tours/private/', true) };
 
 export default function IcelandicPrivateTourPage() {
   const c = isPrivateCopy;
