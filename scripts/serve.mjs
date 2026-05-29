@@ -4,8 +4,10 @@
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const ROOT = path.join(process.cwd(), 'out');
+// Resolve out/ relative to this script (scripts/ -> ../out), so cwd doesn't matter.
+const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'out');
 const PORT = Number(process.argv[2]) || 4321;
 
 const TYPES = {
