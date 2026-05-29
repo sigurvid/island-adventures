@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CustomTripForm } from '@/components/CustomTripForm';
+import { MapEmbed } from '@/components/MapEmbed';
 import { customTripFormIs } from '@/content/is/custom-trip-form';
 import { isContactCopy, isContactMetadata } from '@/content/is/contact';
 import { alternates } from '@/lib/seo';
@@ -25,18 +26,7 @@ export default function IcelandicContactPage() {
           {c.meetingHeading}
         </h2>
         <p className="text-gray-600">{c.meetingBody}</p>
-        <div className="mt-4 aspect-video overflow-hidden rounded-xl border border-alpine/20">
-          <iframe
-            title={c.iframeTitle}
-            src="https://www.google.com/maps?q=B%C3%A1saskersbryggja+6,+900+Vestmannaeyjar,+Iceland&z=16&output=embed"
-            width="100%"
-            height="100%"
-            className="min-h-[280px] border-0"
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
+        <MapEmbed title={c.iframeTitle} label="Sýna kort" address="Básaskersbryggja 6, 900 Vestmannaeyjar" />
       </section>
 
       <section id="custom" className="mt-14">

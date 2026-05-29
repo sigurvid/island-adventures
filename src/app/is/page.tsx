@@ -12,6 +12,7 @@ import {
 } from '@/content/is/home';
 import { LocalBusinessJsonLd, TourJsonLd } from '@/components/JsonLd';
 import { BokunWidget } from '@/components/BokunWidget';
+import { MapEmbed } from '@/components/MapEmbed';
 import { alternates } from '@/lib/seo';
 
 export const metadata: Metadata = { ...isHomeMetadata, alternates: alternates('/', true) };
@@ -179,18 +180,7 @@ export default function IcelandicHomePage() {
             <div>
               <h3 className="font-semibold text-alpine-dark">{c.meetingHeading}</h3>
               <p className="mt-1 text-sm text-gray-600">{c.meetingBody}</p>
-              <div className="mt-4 aspect-video overflow-hidden rounded-xl border border-alpine/20">
-                <iframe
-                  title={c.iframeTitle}
-                  src="https://www.google.com/maps?q=B%C3%A1saskersbryggja+6,+900+Vestmannaeyjar,+Iceland&z=16&output=embed"
-                  width="100%"
-                  height="100%"
-                  className="min-h-[280px] border-0"
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
+              <MapEmbed title={c.iframeTitle} label="Sýna kort" address="Básaskersbryggja 6, 900 Vestmannaeyjar" />
             </div>
             <div id="custom">
               <CustomTripForm apiEndpoint="/api/custom-trip" fallbackEmail="booking@islandadventures.is" copy={customTripFormIs} />

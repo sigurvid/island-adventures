@@ -4,6 +4,7 @@ import { TourCard } from '@/components/TourCard';
 import { ImageCarousel } from '@/components/ImageCarousel';
 import { CustomTripForm } from '@/components/CustomTripForm';
 import { BokunWidget } from '@/components/BokunWidget';
+import { MapEmbed } from '@/components/MapEmbed';
 import { LocalBusinessJsonLd, TourJsonLd } from '@/components/JsonLd';
 import { alternates, og } from '@/lib/seo';
 
@@ -249,18 +250,11 @@ export default function HomePage() {
             <div>
               <h3 className="font-semibold text-alpine-dark">Meeting point & map</h3>
               <p className="mt-1 text-sm text-gray-600">Básaskersbryggja 6, 900 Vestmannaeyjar, Iceland. Please arrive at least 15 minutes before departure.</p>
-              <div className="mt-4 aspect-video overflow-hidden rounded-xl border border-alpine/20">
-                <iframe
-                  title="Island Adventures meeting point — Básaskersbryggja 6, Vestmannaeyjar"
-                  src="https://www.google.com/maps?q=B%C3%A1saskersbryggja+6,+900+Vestmannaeyjar,+Iceland&z=16&output=embed"
-                  width="100%"
-                  height="100%"
-                  className="min-h-[280px] border-0"
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
+              <MapEmbed
+                title="Island Adventures meeting point — Básaskersbryggja 6, Vestmannaeyjar"
+                label="Show map"
+                address="Básaskersbryggja 6, 900 Vestmannaeyjar"
+              />
             </div>
             <div id="custom">
               <CustomTripForm apiEndpoint="/api/custom-trip" fallbackEmail="booking@islandadventures.is" />

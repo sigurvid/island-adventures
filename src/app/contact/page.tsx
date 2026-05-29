@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CustomTripForm } from '@/components/CustomTripForm';
+import { MapEmbed } from '@/components/MapEmbed';
 import { alternates, og } from '@/lib/seo';
 
 export const metadata: Metadata = {
@@ -27,18 +28,11 @@ export default function ContactPage() {
         <p className="text-gray-600">
           Básaskersbryggja 6, 900 Vestmannaeyjar, Iceland. Please arrive at least 15 minutes before departure.
         </p>
-        <div className="mt-4 aspect-video overflow-hidden rounded-xl border border-alpine/20">
-          <iframe
-            title="Island Adventures meeting point — Básaskersbryggja 6, Vestmannaeyjar"
-            src="https://www.google.com/maps?q=B%C3%A1saskersbryggja+6,+900+Vestmannaeyjar,+Iceland&z=16&output=embed"
-            width="100%"
-            height="100%"
-            className="min-h-[280px] border-0"
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
+        <MapEmbed
+          title="Island Adventures meeting point — Básaskersbryggja 6, Vestmannaeyjar"
+          label="Show map"
+          address="Básaskersbryggja 6, 900 Vestmannaeyjar"
+        />
       </section>
 
       <section id="custom" className="mt-14">
