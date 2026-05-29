@@ -81,7 +81,7 @@ export function Header() {
             <Link
               key={link.href}
               href={withLocale(link.href)}
-              className={`font-medium text-alpine-dark hover:text-alpine focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine rounded transition-all duration-300 ${
+              className={`inline-flex items-center py-2 font-medium text-alpine-dark hover:text-alpine focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine rounded transition-all duration-300 ${
                 scrolled ? 'text-sm' : 'text-base'
               }`}
             >
@@ -96,7 +96,7 @@ export function Header() {
           </Link>
           <Link
             href={withLocale('/tours/custom')}
-            className={`font-medium text-alpine-dark hover:text-alpine focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine rounded transition-all duration-300 ${
+            className={`inline-flex items-center py-2 font-medium text-alpine-dark hover:text-alpine focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine rounded transition-all duration-300 ${
               scrolled ? 'text-sm' : 'text-base'
             }`}
           >
@@ -120,7 +120,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-alpine/20 text-alpine focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-alpine/20 text-alpine focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpine"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label="Toggle menu"

@@ -379,10 +379,6 @@ export function CustomTripForm({
           {copy.errorEmailPrompt}{' '}
           <a href={`mailto:${fallbackEmail}`} className="font-medium underline">
             {fallbackEmail}
-          </a>{' '}
-          {copy.errorOr}{' '}
-          <a href="mailto:booking@islandadventures.com" className="font-medium underline">
-            booking@islandadventures.com
           </a>
           .
         </p>

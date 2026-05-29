@@ -82,10 +82,10 @@ export function TourCard({
           </p>
         )}
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link href={ctaHref} className="btn-primary text-sm py-2 px-4">
+          <Link href={ctaHref} className="btn-primary min-h-11 text-sm py-2 px-4">
             {ctaLabel}
           </Link>
-          <Link href={slug} className="btn-secondary text-sm py-2 px-4">
+          <Link href={slug} className="btn-secondary min-h-11 text-sm py-2 px-4">
             {detailsLabel}
           </Link>
         </div>

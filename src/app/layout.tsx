@@ -56,6 +56,12 @@ export default function RootLayout({
         <WebSiteJsonLd />
       </head>
       <body className="min-h-screen flex flex-col font-sans">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-alpine focus:px-4 focus:py-2 focus:font-semibold focus:text-white"
+        >
+          Skip to content
+        </a>
         <Script
           src="https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=ce638209-9fde-496b-95b4-c57690eb5091"
           strategy="afterInteractive"
