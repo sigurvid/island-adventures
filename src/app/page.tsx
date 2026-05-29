@@ -40,7 +40,7 @@ const TOUR_CARDS = [
     slug: '/tours/two-hour',
     title: '2-hour RIB tour',
     description:
-      'Deeper exploration: more sea caves, longer coastline and more time on the water. Our most popular option.',
+      'The full circle around Heimaey: the island’s most spectacular sea caves, cliffs and volcanic coast, with views toward Súlnasker and — conditions permitting — Surtsey. Loads of birdlife and epic photos.',
     duration: '2 hours',
     imageSrcs: ['/images/tour-2h.jpg'],
     imageAlt: '2-hour RIB tour along Westman Islands cliffs',
@@ -52,7 +52,7 @@ const TOUR_CARDS = [
     slug: '/tours/private',
     title: 'Private charters',
     description:
-      'Reward your team with a high-impact day on the water, or turn a stag or hen weekend into something nobody stops talking about. Same epic 1-hour or 2-hour RIB route as our scheduled tours — your group, your pace, your soundtrack. By inquiry only.',
+      'The same 1-hour or 2-hour RIB route as our scheduled tours — sea caves, cliffs and wildlife — but with the boat reserved for your team, your stag or hen crew, or your whole group. By inquiry only.',
     duration: '1h or 2h',
     imageSrcs: ['/images/tour-private.jpg'],
     imageAlt: 'Private RIB charter Vestmannaeyjar',
@@ -64,7 +64,7 @@ const TOUR_CARDS = [
     slug: '/tours/custom',
     title: 'Luxury trips',
     description:
-      'Bespoke RIB experiences: champagne and catering on the water, longer routes, celebrations and brand moments — built entirely around you. Unlike private charters (the classic 1h/2h tour, your boat only), luxury trips are tailored itineraries. Tell us what you’re planning.',
+      'Tailored RIB experiences built around you: catering on the water, a company outing, a stag or hen upgrade, or a longer bespoke route. Unlike private charters, luxury trips are fully custom itineraries.',
     duration: 'On request',
     imageSrcs: ['/images/tour-custom.jpg'],
     imageAlt: 'Luxury RIB experience Westman Islands',
